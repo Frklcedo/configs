@@ -45,7 +45,7 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/fr/.config/awesome/theme.lua")
+beautiful.init("/home/franklin/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
@@ -94,11 +94,10 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal }
                                   }
                         })
-praisewidget = wibox.widget.textbox()
-praisewidget.text = "You are great"
+--praisewidget = wibox.widget.textbox()
+--praisewidget.text = "You are great"
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mymainmenu })
-
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
@@ -205,7 +204,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
             mylauncher,
-	    praisewidget,
+	    --praisewidget,
             s.mypromptbox,
         },
         s.mytasklist, -- Middle widget
@@ -220,7 +219,6 @@ awful.screen.connect_for_each_screen(function(s)
     }
 end)
 -- }}}
-
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
@@ -578,8 +576,5 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart
 awful.spawn.with_shell("nitrogen --restore &")
-awful.spawn.with_shell("picom --config /home/fr/.config/picom/picom.conf &")
-
-
--- Applications
+awful.spawn.with_shell("picom --config /home/franklin/.config/picom/picom.conf &")
 
