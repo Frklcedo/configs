@@ -62,9 +62,9 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.tile.left,
     awful.layout.suit.floating,
     awful.layout.suit.max,
-    --awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
@@ -196,7 +196,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
+    s.mywibox = awful.wibar({ position = "top", screen = s, height = 20 })
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -205,6 +205,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             -- mylauncher,
             s.mylayoutbox,
+            mykeyboardlayout,
             s.mypromptbox,
         },
         --s.mytasklist, -- Middle widget
@@ -215,7 +216,7 @@ awful.screen.connect_for_each_screen(function(s)
 	),
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            -- mykeyboardlayout,
             wibox.widget.systray(),
             s.mytaglist,
         },
@@ -258,9 +259,9 @@ globalkeys = gears.table.join(
               {description = "show main menu", group = "awesome"}),
 
     -- Layout manipulation
-    awful.key({ modkey,           }, "h", function () awful.client.swap.byidx(  1)    end,
+    awful.key({ modkey,           }, "l", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
-    awful.key({ modkey,           }, "l", function () awful.client.swap.byidx( -1)    end,
+    awful.key({ modkey,           }, "h", function () awful.client.swap.byidx( -1)    end,
               {description = "swap with previous client by index", group = "client"}),
     awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_relative( 1) end,
               {description = "focus the next screen", group = "screen"}),
