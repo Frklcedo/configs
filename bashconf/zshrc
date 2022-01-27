@@ -9,7 +9,9 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
   source /usr/share/zsh/manjaro-zsh-prompt
 fi
 
+PATH="$HOME/.cargo/bin${PATH:+:${PATH}}"
+
 neofetch
 
-alias ls='ls -lah --color=auto'
-alias cdlprog='cd /run/media/franklin/HD/lprog'
+alias ls='exa -al --color=always --group-directories-first'
+alias cdlp='cd /run/media/hd/lprog'
