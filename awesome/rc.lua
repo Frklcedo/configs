@@ -344,8 +344,13 @@ globalkeys = gears.table.join(
 
 	-- rofi -show window
  	awful.key({ "Mod1" }, "Tab", function() awful.util.spawn("rofi -show window") end,
-	{description = "visual studio code", group = "client"})
+	{description = "rofi windows", group = "client"}),
 
+	-- flameshot
+ 	awful.key({ }, "Print", function() awful.util.spawn("flameshot screen -c") end,
+	{description = "print", group = "client"}),
+ 	awful.key({ modkey }, "Print", function() awful.util.spawn("flameshot gui") end,
+	{description = "print gui", group = "client"})
 
 )
 
