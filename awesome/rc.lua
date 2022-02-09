@@ -1,5 +1,10 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
+	-- personal needs to run awesome desktop
+	-- nitrogen picom konsole firefox flameshot rofi vscode dmenu	
+	-- ubuntu fonts pavucontrol
+	-- https://github.com/streetturtle/awesome-wm-widgets
+
 pcall(require, "luarocks.loader")
 
 -- Standard awesome library
@@ -106,8 +111,17 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+--
+-- personal 
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock(' %d/%m/%Y  %H:%M ')
+-- Create an empty spacing widget 
+myemptybox = wibox.widget.textbox('                     ')
+--                                '123456789123456789123'
+
+	-- personal widgets 
+	local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -207,6 +221,7 @@ awful.screen.connect_for_each_screen(function(s)
             s.mylayoutbox,
             mykeyboardlayout,
             s.mypromptbox,
+	    myemptybox,
         },
         --s.mytasklist, -- Middle widget
 	wibox.container.place(
@@ -215,9 +230,14 @@ awful.screen.connect_for_each_screen(function(s)
     		'center'
 	),
         { -- Right widgets
+		spacing =6,
             layout = wibox.layout.fixed.horizontal,
             -- mykeyboardlayout,
             wibox.widget.systray(),
+	    volume_widget{
+            widget_type = 'icon',
+	    device = 'default'
+       	    },
             s.mytaglist,
         },
     }
@@ -594,6 +614,6 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
--- Autostart
+-- Autostart personal
 awful.spawn.with_shell("nitrogen --restore &")
 awful.spawn.with_shell("picom --config /home/franklin/.config/picom/picom.conf &")
