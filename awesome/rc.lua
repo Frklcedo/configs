@@ -370,7 +370,12 @@ globalkeys = gears.table.join(
  	awful.key({ }, "Print", function() awful.util.spawn("flameshot screen -c") end,
 	{description = "print", group = "client"}),
  	awful.key({ modkey }, "Print", function() awful.util.spawn("flameshot gui") end,
-	{description = "print gui", group = "client"})
+	{description = "print gui", group = "client"}),
+
+	-- telegram
+	awful.key({ modkey, "Shift" }, "t", function() awful.util.spawn("telegram-desktop") end,
+	{description = "telegram-desktop", group = "client"}),
+
 
 )
 
