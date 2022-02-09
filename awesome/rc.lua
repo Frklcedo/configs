@@ -374,7 +374,7 @@ globalkeys = gears.table.join(
 
 	-- telegram
 	awful.key({ modkey, "Shift" }, "t", function() awful.util.spawn("telegram-desktop") end,
-	{description = "telegram-desktop", group = "client"}),
+	{description = "telegram-desktop", group = "client"})
 
 
 )
