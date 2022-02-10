@@ -381,7 +381,7 @@ globalkeys = gears.table.join(
 	{description = "pcmanfm", group = "client"}),
 
 	-- onlyoffice
-	awful.key({ modkey, "Mod1" }, "o", function() awful.util.spawn("flatpak run org.onlyoffice.desktopeditors") end,
+	awful.key({ modkey, "Control" }, "o", function() awful.util.spawn("flatpak run org.onlyoffice.desktopeditors") end,
 	{description = "onlyoffice", group = "client"})
 
 
