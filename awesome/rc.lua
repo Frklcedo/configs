@@ -1,7 +1,7 @@
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 	-- personal needs to run awesome desktop
-	-- nitrogen picom konsole firefox flameshot rofi vscode dmenu	
+	-- nitrogen picom-git konsole brave firefox flameshot rofi vscode dmenu	openoffice
 	-- ubuntu fonts pavucontrol
 	-- https://github.com/streetturtle/awesome-wm-widgets
 
@@ -358,6 +358,10 @@ globalkeys = gears.table.join(
 	awful.key({ modkey, "Mod1" }, "f", function() awful.util.spawn("firefox") end,
 	{description = "firefox", group = "client"}),
 
+    	-- brave
+	awful.key({ modkey, "Mod1" }, "b", function() awful.util.spawn("brave") end,
+	{description = "firefox", group = "client"}),
+
 	-- vscode
 	awful.key({ modkey, "Mod1" }, "c", function() awful.util.spawn("code") end,
 	{description = "visual studio code", group = "client"}),
@@ -630,4 +634,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 
 -- Autostart personal
 awful.spawn.with_shell("nitrogen --restore &")
-awful.spawn.with_shell("picom --config /home/franklin/.config/picom/picom.conf &")
+awful.spawn.with_shell("picom --experimental-backends --config /home/franklin/.config/picom/picom.conf &")

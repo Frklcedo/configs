@@ -13,7 +13,7 @@ local theme = {}
 
 theme.font          = "Ubuntu Mono:style=Bold 14"
 
-theme.bg_normal     = "#282c33"
+theme.bg_normal     = "#282c33f2"
 theme.bg_focus      = "#b1e18b"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#282c34"
