@@ -10,8 +10,16 @@ if [[ -e /usr/share/zsh/manjaro-zsh-prompt ]]; then
 fi
 
 PATH="$HOME/.cargo/bin${PATH:+:${PATH}}"
+PATH="$HOME/.pycharm/bin${PATH:+:${PATH}}"
 
 neofetch
 
 alias ls='exa -al --color=always --group-directories-first'
 alias cdlp='cd /run/media/hd/lprog'
+alias cd..='cd ..'
+alias cdap='cd /srv/http'
+alias lolenter='sudo sysctl -w abi.vsyscall32=0'
+alias pycharm='pycharm.sh'
+
+export WORKON_HOME=~/.virtualenvsi
+source /usr/bin/virtualenvwrapper.sh

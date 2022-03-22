@@ -3,6 +3,7 @@
 	-- personal needs to run awesome desktop
 	-- nitrogen picom-git konsole brave firefox flameshot rofi vscode dmenu	openoffice
 	-- ubuntu fonts pavucontrol
+	-- pycharm (set home directory)
 	-- https://github.com/streetturtle/awesome-wm-widgets
 
 pcall(require, "luarocks.loader")
@@ -54,6 +55,7 @@ beautiful.init("/home/franklin/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "konsole"
+homepath = "/home/franklin/"
 editor = os.getenv("EDITOR") or "kate"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -67,16 +69,16 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
     awful.layout.suit.max,
     awful.layout.suit.floating,
     --awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
+    --awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
     --awful.layout.suit.spiral,
     --awful.layout.suit.spiral.dwindle,
     awful.layout.suit.max.fullscreen,
+    awful.layout.suit.tile.left,
     --awful.layout.suit.magnifier,
     --awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
@@ -360,11 +362,15 @@ globalkeys = gears.table.join(
 
     	-- brave
 	awful.key({ modkey, "Mod1" }, "b", function() awful.util.spawn("brave") end,
-	{description = "firefox", group = "client"}),
+	{description = "brave", group = "client"}),
 
 	-- vscode
 	awful.key({ modkey, "Mod1" }, "c", function() awful.util.spawn("code") end,
 	{description = "visual studio code", group = "client"}),
+
+	-- pycharm
+	awful.key({ modkey, "Mod1" }, "p", function() awful.spawn.with_shell(homepath..".pycharm/bin/pycharm.sh") end,
+	{description = "pycharm", group = "client"}),
 
 	-- rofi -show window
  	awful.key({ "Mod1" }, "Tab", function() awful.util.spawn("rofi -show window") end,
