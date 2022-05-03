@@ -11,9 +11,9 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Ubuntu Mono:style=Bold 14"
+theme.font          = "Ubuntu Mono:style=Bold 11"
 
-theme.bg_normal     = "#282c33f2"
+theme.bg_normal     = "#282c33"
 theme.bg_focus      = "#b1e18b"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#282c34"
@@ -24,8 +24,8 @@ theme.fg_focus      = "#282c34"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#abb2bf"
 
-theme.useless_gap   = dpi(4)
-theme.border_width  = dpi(3)
+theme.useless_gap   = dpi(3)
+theme.border_width  = dpi(2)
 theme.border_normal = "#282c34"
 theme.border_focus  = "#b1e18ba1"
 theme.border_marked = "#91231c"
