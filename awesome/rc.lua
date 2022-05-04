@@ -3,7 +3,6 @@
 	-- personal needs to run awesome desktop
 	-- nitrogen picom-git konsole brave firefox flameshot rofi vscode dmenu	openoffice
 	-- ubuntu fonts pavucontrol
-	-- pycharm (set home directory)
 	-- https://github.com/streetturtle/awesome-wm-widgets
 
 pcall(require, "luarocks.loader")
@@ -369,7 +368,7 @@ globalkeys = gears.table.join(
 	{description = "visual studio code", group = "client"}),
 
 	-- pycharm
-	awful.key({ modkey, "Mod1" }, "p", function() awful.spawn.with_shell(homepath..".pycharm/bin/pycharm.sh") end,
+	awful.key({ modkey, "Shift" }, "p", function() awful.spawn.with_shell(homepath..".pycharm/bin/pycharm.sh") end,
 	{description = "pycharm", group = "client"}),
 
 	-- rofi -show window
@@ -571,6 +570,11 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
     --   properties = { screen = 1, tag = "2" } },
+    
+    -- Set Vm to fullscreen
+    { rule = { class = "VirtualBox Machine" },
+    properties = { fullscreen = true } }
+
 }
 -- }}}
 
