@@ -1,0 +1,12 @@
+user.name=Frklcedo
+user.email=franklinmacedo5115@gmail.com
+init.defaultbranch=master
+core.editor=vim
+core.repositoryformatversion=0
+core.filemode=true
+core.bare=false
+core.logallrefupdates=true
+remote.origin.url=https://github.com/Frklcedo/configs.git
+remote.origin.fetch=+refs/heads/*:refs/remotes/origin/*
+branch.master.remote=origin
+branch.master.merge=refs/heads/master

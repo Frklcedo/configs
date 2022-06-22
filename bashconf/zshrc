@@ -11,15 +11,22 @@ fi
 
 PATH="$HOME/.cargo/bin${PATH:+:${PATH}}"
 PATH="$HOME/.pycharm/bin${PATH:+:${PATH}}"
+PATH="$HOME/.dotnet/tools${PATH:+:${PATH}}"
+PATH="$HOME/.emacs.d/bin${PATH:+:${PATH}}"
 
 neofetch
 
 alias ls='exa -al --color=always --group-directories-first'
+alias cdfr='cd /run/media/hd/_frankola'
 alias cdlp='cd /run/media/hd/lprog'
+alias cdhd='cd /run/media/hd'
 alias cd..='cd ..'
 alias cdap='cd /srv/http'
 alias lolenter='sudo sysctl -w abi.vsyscall32=0'
 alias pycharm='pycharm.sh'
+alias emacs="emacsclient -c -a 'emacs'"
+alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
 
+export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 export WORKON_HOME=~/.virtualenvsi
 source /usr/bin/virtualenvwrapper.sh

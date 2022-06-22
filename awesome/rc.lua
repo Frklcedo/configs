@@ -370,6 +370,10 @@ globalkeys = gears.table.join(
 	-- pycharm
 	awful.key({ modkey, "Shift" }, "p", function() awful.spawn.with_shell(homepath..".pycharm/bin/pycharm.sh") end,
 	{description = "pycharm", group = "client"}),
+	
+	-- pycharm
+	awful.key({ modkey, "Shift" }, "p", function() awful.spawn.with_shell("emacsclient -c -a 'emacs'") end,
+	{description = "emacs", group = "client"}),
 
 	-- rofi -show window
  	awful.key({ "Mod1" }, "Tab", function() awful.util.spawn("rofi -show window") end,
