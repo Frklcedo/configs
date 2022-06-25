@@ -40,8 +40,9 @@ terminal = guess_terminal()
 startupfile = '/.config/qtile/autostart.sh'
 defaultcolor = {
     "primary": "#FF8AA9",
-    "secondary": "#0E448A"
+    "secondary": "#021526"
 }
+fontdefault = (None)
 pclayout = {
     "margin": 10,
     "border_width": 2,
@@ -60,7 +61,7 @@ keys = [
     Key([mod], "k", lazy.layout.up(), desc="Move focus up"),
 
     Key([mod], "o", lazy.layout.grow_main(), desc="over sizing"),
-    Key([mod], "b", lazy.layout.shrink_main(), desc="back sizing"),
+    Key([mod], "y", lazy.layout.shrink_main(), desc="back sizing"),
 
     Key([mod], "Tab", lazy.layout.next(), desc="Move window focus to other window"),
     # Move windows between left/right columns or move up/down in current stack.
@@ -103,6 +104,8 @@ keys = [
     Key([mod], "c", lazy.spawn("emacsclient -c -a 'emacs'"), desc="emacs"),
     Key([mod], "p", lazy.spawn("dmenu_run"), desc="dmenu"),
     Key([mod, "mod1"], "f", lazy.spawn("firefox"), desc="Firefox"),
+    Key([], "Print", lazy.spawn("flameshot screen -c"), desc="print"),
+    Key([mod], "Print", lazy.spawn("flameshot gui"), desc="print gui"),
 ]
 
 personalenv = "12345"
@@ -159,6 +162,7 @@ screens = [
     Screen(
         top=bar.Bar(
             [
+                widget.Spacer(length=3),
                 widget.CurrentLayoutIcon(),
                 widget.GroupBox(
                     highlight_method="line",
@@ -180,16 +184,21 @@ screens = [
                 widget.Clock(format="%d/%m/%Y %H:%M %p"),
                 widget.Spacer(),
                 widget.Systray(),
-                widget.Volume(),
+                widget.Spacer(length=3),
+                widget.Volume(
+                    padding=5,
+                    emoji=True
+                ),
                 widget.QuickExit(
                     default_text='[X]',
                     countdown_start=3,
-                    countdown_format='[{}]'
+                    countdown_format='[{}]',
                 ),
+                widget.Spacer(length=3)
             ],
             20,
-            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
-            # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
+            border_width=[0, 2, 0, 2],  # Draw top and bottom borders
+            border_color=["000000", defaultcolor["primary"], "ff00ff", defaultcolor["primary"]]  # Borders are magenta
         ),
     ),
 ]
@@ -197,7 +206,7 @@ screens = [
 # Drag floating layouts.
 mouse = [
     Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod, "shift"], "Button1", lazy.window.set_size_floating(), start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
