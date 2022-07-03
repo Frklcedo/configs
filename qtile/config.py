@@ -26,10 +26,13 @@
 
 
 #   #
-    # dependencies: firefox, nitrogen, picom, emacs, amixer
+    # dependencies: firefox, nitrogen, picom, emacs, amixer, pavucontrol
 
 import os
 import subprocess
+import netifaces
+import psutil
+import socket
 from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
@@ -54,6 +57,16 @@ pclayout = {
     "border_focus": defaultcolor['primary'],
     "border_normal": defaultcolor['secondary']
 }
+
+
+def get_up_if():
+    ifs = netifaces.interfaces()
+    for iff in ifs:
+        if iff != 'lo':
+            interface_addrs = psutil.net_if_addrs().get(iff) or []
+            if socket.AF_INET in [snicaddr.family for snicaddr in interface_addrs]:
+                return iff
+    return "enp20s0"
 
 
 keys = [
@@ -189,12 +202,28 @@ screens = [
                 widget.Clock(format="%d/%m/%Y %H:%M %p"),
                 widget.Spacer(),
                 widget.Systray(),
-                widget.Spacer(length=3),
+                widget.Spacer(length=10),
+                widget.Net(
+                    # interface=['wlp14s0', 'enp20s0'],
+                    interface=get_up_if(),
+                    foreground='#121212',
+                    background=defaultcolor['primary'],
+                    font=f"{fontdefault} Bold",
+                    padding=10,
+                    format='{interface}: {down} ↓↑ {up}'
+                ),
+                widget.Sep(
+                    foreground="#000000"
+                ),
                 widget.Volume(
-                    padding=5,
-                    font=fontemoji,
                     emoji=True,
-                    volume_app='pavucontrol'
+                    padding=2,
+                ),
+                widget.Volume(
+                    padding=2,
+                ),
+                widget.Sep(
+                    foreground="#000000"
                 ),
                 widget.QuickExit(
                     default_text='\uF011',
@@ -203,10 +232,10 @@ screens = [
                     font=fontemoji,
                     padding=5
                 ),
-                widget.Spacer(length=3)
+                widget.Spacer(length=5)
             ],
             20,
-            border_width=[0, 2, 0, 2],  # Draw top and bottom borders
+            border_width=[0, 2, 0, 0],  # Draw top and bottom borders
             border_color=["000000", defaultcolor["primary"], "ff00ff", defaultcolor["primary"]]  # Borders are magenta
         ),
     ),
