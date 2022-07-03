@@ -36,13 +36,18 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 mod = "mod4"
-terminal = guess_terminal()
+# terminal = guess_terminal()
+#terminal = "xfce4-terminal"
+terminal = "st"
 startupfile = '/.config/qtile/autostart.sh'
 defaultcolor = {
     "primary": "#FF8AA9",
     "secondary": "#021526"
 }
-fontdefault = (None)
+#fontdefault = "sans"
+fontdefault = "Ubuntu"
+#fontemoji = "sans"
+fontemoji = "FontAwesome"
 pclayout = {
     "margin": 10,
     "border_width": 2,
@@ -152,7 +157,7 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font="sans",
+    font=fontdefault,
     fontsize=12,
     padding=3,
 )
@@ -187,12 +192,16 @@ screens = [
                 widget.Spacer(length=3),
                 widget.Volume(
                     padding=5,
-                    emoji=True
+                    font=fontemoji,
+                    emoji=True,
+                    volume_app='pavucontrol'
                 ),
                 widget.QuickExit(
-                    default_text='[X]',
+                    default_text='\uF011',
                     countdown_start=3,
-                    countdown_format='[{}]',
+                    countdown_format='{}',
+                    font=fontemoji,
+                    padding=5
                 ),
                 widget.Spacer(length=3)
             ],
