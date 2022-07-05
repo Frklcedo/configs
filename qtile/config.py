@@ -27,6 +27,8 @@
 
 #   #
     # dependencies: firefox, nitrogen, picom, emacs, amixer, pavucontrol
+    # ttf-ubuntu-font-family, ttf-font-icons
+    # git clone https://git.suckless.org/dmenu
 
 import os
 import subprocess
@@ -41,7 +43,8 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 # terminal = guess_terminal()
 #terminal = "xfce4-terminal"
-terminal = "st"
+#terminal = "st"
+terminal = "alacritty"
 startupfile = '/.config/qtile/autostart.sh'
 defaultcolor = {
     "primary": "#FF8AA9",
