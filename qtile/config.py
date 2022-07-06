@@ -24,10 +24,13 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-
 #   #
-    # dependencies: firefox, nitrogen, picom, emacs, amixer, pavucontrol
-    # ttf-ubuntu-font-family, ttf-font-icons
+    # dependencies: firefox nitrogen picom emacs amixer pavucontrol
+    #       pcmanfm flameshot
+    #       ttf-ubuntu-font-family ttf-font-icons
+    # 
+    # https://aur.archlinux.org/yay-git.git
+    # yay: brave-bin
     # git clone https://git.suckless.org/dmenu
 
 import os
@@ -35,7 +38,7 @@ import subprocess
 import netifaces
 import psutil
 import socket
-from libqtile import bar, layout, widget, hook
+from libqtile import qtile, bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -53,9 +56,9 @@ defaultcolor = {
 #fontdefault = "sans"
 fontdefault = "Ubuntu"
 #fontemoji = "sans"
-fontemoji = "FontAwesome"
+fontemoji = "FontAwesome all-the-icons"
 pclayout = {
-    "margin": 10,
+    "margin": 12,
     "border_width": 2,
     "border_focus": defaultcolor['primary'],
     "border_normal": defaultcolor['secondary']
@@ -123,10 +126,13 @@ keys = [
     Key([mod], "f", lazy.window.toggle_fullscreen(), desc="fullscreen window"),
 
     Key([mod], "c", lazy.spawn("emacsclient -c -a 'emacs'"), desc="emacs"),
-    Key([mod], "p", lazy.spawn("dmenu_run"), desc="dmenu"),
+    Key([mod], "p", lazy.spawn("dmenu_run -h 20"), desc="dmenu"),
     Key([mod, "mod1"], "f", lazy.spawn("firefox"), desc="Firefox"),
+    Key([mod, "mod1"], "b", lazy.spawn("brave"), desc="Brave browser"),
     Key([], "Print", lazy.spawn("flameshot screen -c"), desc="print"),
     Key([mod], "Print", lazy.spawn("flameshot gui"), desc="print gui"),
+    Key([mod, "shift"], "d", lazy.spawn("pcmanfm"), desc="pcmanfm"),
+    Key([mod, "control"], "v", lazy.spawn("pavucontrol"), desc="audio control"),
 ]
 
 personalenv = "12345"
@@ -172,6 +178,7 @@ layouts = [
     #layout.Zoomy(),
 ]
 
+
 widget_defaults = dict(
     font=fontdefault,
     fontsize=12,
@@ -183,13 +190,16 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.Spacer(length=3),
+                widget.Sep(
+                    foreground="#000000"
+                ),
                 widget.CurrentLayoutIcon(),
                 widget.GroupBox(
                     highlight_method="line",
                     this_current_screen_border=defaultcolor['primary'],
                     this_screen_border=defaultcolor['primary'],
-                    highlight_color=['121212'],
+                    highlight_color=['202020'],
+                    inactive=['808080'],
                 ),
                 widget.Prompt(),
                 widget.Chord(
@@ -202,31 +212,36 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Spacer(),
-                widget.Clock(format="%d/%m/%Y %H:%M %p"),
+                widget.Clock(
+                    font=f"{fontdefault} Bold",
+                    format="%d/%m/%Y %H:%M %p"
+                ),
                 widget.Spacer(),
                 widget.Systray(),
-                widget.Spacer(length=10),
+                #widget.Spacer(length=2),
                 widget.Net(
                     # interface=['wlp14s0', 'enp20s0'],
                     interface=get_up_if(),
-                    foreground='#121212',
-                    background=defaultcolor['primary'],
                     font=f"{fontdefault} Bold",
-                    padding=10,
+                    padding=12,
                     format='{interface}: {down} ↓↑ {up}'
                 ),
                 widget.Sep(
-                    foreground="#000000"
+                    background=defaultcolor['primary'],
+                    foreground=defaultcolor['primary'],
                 ),
                 widget.Volume(
-                    emoji=True,
-                    padding=2,
-                ),
-                widget.Volume(
-                    padding=2,
+                    fmt="\uF028 {}",
+                    padding=3,
+                    background=defaultcolor['primary'],
+                    foreground=defaultcolor['secondary'],
                 ),
                 widget.Sep(
-                    foreground="#000000"
+                    background=defaultcolor['primary'],
+                    foreground=defaultcolor['primary'],
+                ),
+                widget.Sep(
+                    foreground='000000',
                 ),
                 widget.QuickExit(
                     default_text='\uF011',
@@ -253,7 +268,7 @@ mouse = [
 
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
-follow_mouse_focus = True
+follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
