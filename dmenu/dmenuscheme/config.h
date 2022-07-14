@@ -8,13 +8,13 @@ static unsigned int min_lineheight = 8;
 static int topbar = 1;                      /* -b  option; if 0, dmenu appears at bottom     */
 /* -fn option overrides fonts[0]; default X11 font or font set */
 static const char *fonts[] = {
-		"Ubuntu Medium:size=14"
+		"Noto Sans:size=12"
 };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {
 	/*     fg         bg       */
-	[SchemeNorm] = { "#FFFFFF", "#121212" },
-	[SchemeSel] = { "#000000", "#FF8AA9" },
+	[SchemeNorm] = { "#abb2bf", "#282c34" },
+	[SchemeSel] = { "#282c34", "#b1e18b" },
 	[SchemeOut] = { "#000000", "#00ffff" },
 };
 /* -l option; if nonzero, dmenu uses vertical list with given number of lines */
